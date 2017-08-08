@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired
 class AddGlyphForm(Form):
     """Form to add a new glyph."""
 
-    name = StringField('Title', validators=[DataRequired()])
+    name = StringField('Glyph name', validators=[DataRequired()])
     sboTerm = StringField('SBO term')
     file_path = FileField()
 
