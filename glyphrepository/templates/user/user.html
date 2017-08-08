@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+    {% if glyphs %}
+
+        {% if (glyphs | length) == 1 %}
+            <h1> 1 glyph submitted by {{ user.username }} </h1>
+        {% else %}
+            <h1> {{ glyphs | length }} glyphs submitted by {{ user.username }} </h1>
+        {% endif %}
+
+        {% include "glyph-table.html" %}
+
+    {% else %}
+        <h1>No glyphs submitted by {{ user.username }} </h1>
+    {% endif %}
+{% endblock %}
+
