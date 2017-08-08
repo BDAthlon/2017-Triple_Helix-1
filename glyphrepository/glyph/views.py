@@ -31,7 +31,7 @@ def show_glyph(glyph_id):
 
 @blueprint.route('/add', methods=['GET', 'POST'])
 @login_required
-def register():
+def add_glyph():
     """Register new user."""
     form = AddGlyphForm(request.form)
 
