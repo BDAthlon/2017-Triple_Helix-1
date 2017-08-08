@@ -4,21 +4,22 @@
 {% block content %}
 <div class="body-content">
 
+<h2><button type="button" class="btn btn-default btn-sm">
+<span class="glyphicon glyphicon-star" aria-hidden="true"></button></span> {{ glyph.name }}</h2>
+
 <div class="row">
-
-  <h1><button type="button" class="btn btn-default btn-sm">
-  <span class="glyphicon glyphicon-star" aria-hidden="true"></button></span> {{ glyph.name }}</h1>
-
-      <p>Associated SBO terms: {{ glyph.sbo_term }}.</p>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="\static\glyphs\1.bmp" alt={{ glyph.name }}>
+      <div class="caption">
+	  <p>Associated SBO terms: {{ glyph.sbo_term }}.</p>
       <p>Creator: {{ glyph.user.username }}.</p>
-      <p>Star Score: 2</p>
+        <p><a href="#" class="btn btn-primary" role="button">Download</a></p>
+      </div>
     </div>
-
-<div class="row">
-<p> put the image here {{ glyph.file_name }} </p>
-
-<button type="button" class="btn btn-primary">Download</button>
+  </div>
 </div>
+
 
 </div>
 {% endblock %}
