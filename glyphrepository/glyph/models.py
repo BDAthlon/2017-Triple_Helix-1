@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Glyph models."""
+from __future__ import division
 
 from glyphrepository.database import Column, Model, SurrogatePK, db, reference_col, relationship
 
@@ -23,3 +24,16 @@ class Glyph(SurrogatePK, Model):
         """Represent instance as a unique string."""
         return '<Role({name})>'.format(name=self.name)
 
+    def average_rating(self):
+        """Return the average rating for a glyph, rounded to one decimal place"""
+
+        # Make a list of all ratings >= 0 (-1 is a sentinel value for unrated)
+        ratings = []
+        for comment in self.comments:
+            if comment.rating >= 0: 
+                ratings.append(comment.rating)
+
+        if len(ratings) == 0:
+            return ""
+        else:
+            return "%.1f" % (sum(ratings) / len(ratings))
