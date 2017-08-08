@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Public forms."""
 from flask_wtf import Form
-from wtforms import StringField
+from wtforms import StringField, FileField
 from wtforms.validators import DataRequired
 
 
@@ -10,7 +10,7 @@ class AddGlyphForm(Form):
 
     name = StringField('Title', validators=[DataRequired()])
     sboTerm = StringField('SBO term')
-    file_path = StringField('File', validators=[DataRequired()])
+    file_path = FileField()
 
 
     def __init__(self, *args, **kwargs):
