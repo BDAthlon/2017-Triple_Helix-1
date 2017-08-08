@@ -8,10 +8,10 @@ from wtforms.validators import DataRequired
 class CommentForm(Form):
     """Form to add a new glyph."""
 
-    name = StringField('Title', validators=[DataRequired()])
+    name = StringField('Comment Title', validators=[DataRequired()])
 
     options = [('-1', '-')]
-    for i in range(0, 5):
+    for i in range(1, 6):
         options.append((str(i), str(i)))
 
     rating = SelectField('Rating', choices=options)
