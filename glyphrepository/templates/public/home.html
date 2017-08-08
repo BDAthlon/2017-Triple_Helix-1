@@ -5,9 +5,10 @@
 <div class="jumbotron">
 
   <h1>Welcome to the Glyphrepository</h1>
+</div><!-- /.jumbotron -->
 
 <div id="glyphs-search-table">
-     <input type="text" id="myInput" class="form-control" onkeyup="search_glyph_table()" placeholder="Filter by SBO term...">
+     <input type="text" id="myInput" class="form-control, input-lg" onkeyup="search_glyph_table()" placeholder="Filter by SBO term...">
     <div class="pre-scrollable">
     <table id="myTable" class='table'>
       <tr class="header">
@@ -19,18 +20,17 @@
        <tbody>
         {% for glyph in glyphs %}
           <tr>
-              <th class="col-sm-1"> {{ glyph.name }} </th>
-              <td class="col-sm-6"> {{ glyph.file_name }} </td>
-              <td class="col-sm-4"> {{ glyph.sbo_term }} </td>
-              <td class="col-sm-4"> {{ glyph.user.username }} </td>
+              <td class="col-sm-1"> {{ glyph.file_name }} </th>
+              <td class="col-sm-2"> {{ glyph.name }} </td>
+              <td class="col-sm-2"> {{ glyph.sbo_term }} </td>
+              <td class="col-sm-2"> {{ glyph.user.username }} </td>
          </tr>
         {% endfor %}
       </tbody>
-
     </table> 
     </div>
 </div>
-</div><!-- /.jumbotron -->
+
 
 <div class="body-content">
   <div class="row">
