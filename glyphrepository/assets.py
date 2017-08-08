@@ -13,6 +13,7 @@ js = Bundle(
     'libs/jQuery/dist/jquery.js',
     'libs/bootstrap/dist/js/bootstrap.js',
     'js/plugins.js',
+    'libs/search_glyph_table.js',
     filters='jsmin',
     output='public/js/common.js'
 )
