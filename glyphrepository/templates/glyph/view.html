@@ -13,6 +13,7 @@
       <img src= "static/glyphs/{{glyph.file_name}}" alt="{{ glyph.name }}">
       <div class="caption">
 	  <p>Associated SBO terms: {{ glyph.sbo_term }}.</p>
+	  <p>Average rating: {{ glyph.average_rating() }}</p>
       <p>Creator: {{ glyph.user.username }}.</p>
         <p><a href="static/glyphs/{{glyph.file_name}}" class="btn btn-primary" role="button" download={{glyph.file_name}} target="_blank">Download</a> <a href="./{{ glyph.id}}/comment" class="btn btn-default" role="button">Comment</a></p>
       </div>
