@@ -10,7 +10,7 @@ class CommentForm(Form):
 
     name = StringField('Title', validators=[DataRequired()])
 
-    options = []
+    options = [('-1', '-')]
     for i in range(0, 5):
         options.append((str(i), str(i)))
 

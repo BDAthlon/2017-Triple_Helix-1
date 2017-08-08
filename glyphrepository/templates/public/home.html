@@ -1,35 +1,38 @@
-
 {% extends "layout.html" %}
 {% block content %}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
 
-  <h1>Welcome to the Glyphrepository</h1>
-</div><!-- /.jumbotron -->
+        <h1>Welcome to the Glyphrepository</h1>
+    </div><!-- /.jumbotron -->
 
-<div id="glyphs-search-table">
-     <input type="text" id="myInput" class="form-control, input-lg" onkeyup="search_glyph_table()" placeholder="Filter by SBO term...">
-    <div class="pre-scrollable">
-    <table id="myTable" class='table'>
-      <tr class="header">
-        <th style="width:10%;">Icon</th>
-        <th style="width:30%;">Name</th>
-        <th style="width:30%;">SBO Terms</th>
-        <th style="width:30%;">Creator</th>
-      </tr>
-       <tbody>
-        {% for glyph in glyphs %}
-          <tr>
-              <td class="col-sm-1"> {{ glyph.file_name }} </th>
-              <td class="col-sm-2"> {{ glyph.name }} </td>
-              <td class="col-sm-2"> {{ glyph.sbo_term }} </td>
-              <td class="col-sm-2"> {{ glyph.user.username }} </td>
-         </tr>
-        {% endfor %}
-      </tbody>
-    </table> 
+    <div id="glyphs-search-table">
+        <input type="text" id="myInput" class="form-control, input-lg" onkeyup="search_glyph_table()"
+               placeholder="Filter by SBO term...">
+        <div class="pre-scrollable">
+            <table id="myTable" class='table'>
+                <tr class="header">
+                    <th style="width:10%;">Icon</th>
+                    <th style="width:30%;">Name</th>
+                    <th style="width:30%;">SBO Terms</th>
+                    <th style="width:30%;">Average Rating</th>
+                    <th style="width:30%;">Creator</th>
+                </tr>
+                <tbody>
+                {% for glyph in glyphs %}
+                    <tr>
+                        <td class="col-sm-1"> {{ glyph.file_name }}
+                        </th>
+                        <td class="col-sm-2"> <a href="glyphs/{{ glyph.id }}">{{ glyph.name }}</a> </td>
+                        <td class="col-sm-2"> {{ glyph.sbo_term }} </td>
+                        <td class="col-sm-2"> {{ glyph.average_rating() }} </td>
+                        <td class="col-sm-2"> {{ glyph.user.username }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
 {% endblock %}
 
