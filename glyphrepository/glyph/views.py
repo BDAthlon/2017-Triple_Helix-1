@@ -41,7 +41,7 @@ def glyph_comment(glyph_id):
     """Comment on a glyph."""
 
     # User can make only one comment per glyph: if they've already made one then redirect to edit page
-    comment_list = Comment.query.filter(Comment.glyph_id == glyph_id and Glyph.user_id == current_user.id).all()
+    comment_list = Comment.query.filter(Comment.glyph_id == glyph_id and Comment.user_id == current_user.id).all()
     if len(comment_list) > 0:
         return redirect(url_for('glyph.edit_glyph_comment', glyph_id=glyph_id))
 
