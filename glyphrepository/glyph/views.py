@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 """Section for viewing/editing a part."""
 from flask import Blueprint, redirect, render_template, url_for, request, flash
-from werkzeug.utils import secure_filename
 from glyphrepository.utils import flash_errors
 
 from glyphrepository.glyph.models import Glyph
+from glyphrepository.comment.models import Comment
+
 from glyphrepository.glyph.forms import AddGlyphForm
+from glyphrepository.comment.forms import CommentForm
+
 from flask_login import login_required, current_user
 
 from flask import current_app as app
@@ -32,14 +35,35 @@ def show_glyph(glyph_id):
         return render_template('glyph/view.html', glyph=glyph_list[0])
 
 
+@blueprint.route('/<glyph_id>/comment', methods=['GET', 'POST'])
+@login_required
+def glyph_comment(glyph_id):
+    """Comment on a glyph."""
+
+    # User can make only one comment per glyph: if they've already made one then redirect back to glyph page
+    comment_list = Comment.query.filter(Comment.glyph_id == glyph_id and Glyph.user_id == current_user.id).all()
+    if len(comment_list) > 0:
+        return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
+
+    form = CommentForm(request.form)
+    if form.validate_on_submit() and request.method == 'POST':
+        Comment.create(name=form.name.data, rating=form.rating.data, comment=form.comment.data, user_id=current_user.id,
+                       glyph_id=glyph_id)
+
+        flash('Comment successfully added.', 'success')
+        return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
+    else:
+        flash_errors(form)
+
+    return render_template('comment/add-comment.html', form=form)
+
+
+
 @blueprint.route('/add', methods=['GET', 'POST'])
 @login_required
 def add_glyph():
-    """Register new user."""
+    """Add new glyph."""
     form = AddGlyphForm(request.form)
-
-    print form.validate_on_submit()
-
     if form.validate_on_submit() and request.method == 'POST':
 
         f = request.files["file_path"]

@@ -9,6 +9,7 @@ class Comment(SurrogatePK, Model):
     __tablename__ = 'comments'
     name = Column(db.String(80), unique=False, nullable=False)
     rating = Column(db.Integer, unique=False, nullable=False)
+    comment = Column(db.String, unique=False, nullable=True)
 
     glyph_id = reference_col('glyphs', nullable=True)
     glyph = relationship('Glyph', backref='comments')
