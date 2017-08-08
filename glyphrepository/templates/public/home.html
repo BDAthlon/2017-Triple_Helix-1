@@ -3,7 +3,9 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
 
-        <h1>Welcome to the Glyphrepository</h1>
+        <h1>SynBio Glyph repository</h1>
+
+        <p>Browse the collection of glyphs, or <a href="{{ url_for('public.register') }}">create an account</a> to comment or submit your own.</p>
     </div><!-- /.jumbotron -->
 
     <div id="glyphs-search-table">
@@ -14,7 +16,7 @@
                 <tr class="header">
                     <th style="width:10%;">Icon</th>
                     <th style="width:30%;">Name</th>
-                    <th style="width:30%;">SBO Terms</th>
+                    <th style="width:30%;"><a href="https://www.ebi.ac.uk/sbo/main/;jsessionid=75847DD41F5672AD085CBEF6679A3CE6">SBO Terms</a></th>
                     <th style="width:30%;">Average Rating</th>
                     <th style="width:30%;">Creator</th>
                 </tr>
@@ -23,7 +25,7 @@
                     <tr>
                         <td class="col-sm-1"> {{ glyph.file_name }}
                         </th>
-                        <td class="col-sm-2"> <a href="glyphs/{{ glyph.id }}">{{ glyph.name }}</a> </td>
+                        <td class="col-sm-2"> <a href="glyph/{{ glyph.id }}">{{ glyph.name }}</a> </td>
                         <td class="col-sm-2"> {{ glyph.sbo_term }} </td>
                         <td class="col-sm-2"> {{ glyph.average_rating() }} </td>
                         <td class="col-sm-2"> {{ glyph.user.username }} </td>
