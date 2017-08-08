@@ -16,42 +16,17 @@
         <th style="width:30%;">SBO Terms</th>
         <th style="width:30%;">Creator</th>
       </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>Cool-Promoter</td>
-        <td>Promoter, Inducible</td>
-        <td>Batman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>Sweet-RBS</td>
-        <td>RBS, UTR</td>
-        <td>Batwoman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>GFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>RFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>BFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>YFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
+       <tbody>
+        {% for glyph in glyphs %}
+          <tr>
+              <th class="col-sm-1"> {{ glyph.name }} </th>
+              <td class="col-sm-6"> {{ glyph.file_name }} </td>
+              <td class="col-sm-4"> {{ glyph.sbo_term }} </td>
+              <td class="col-sm-4"> {{ glyph.user.username }} </td>
+         </tr>
+        {% endfor %}
+      </tbody>
+
     </table> 
     </div>
 </div>
