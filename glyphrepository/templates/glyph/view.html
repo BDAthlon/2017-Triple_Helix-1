@@ -1,1 +1,25 @@
-{{ glyph.name }}
+
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="body-content">
+
+<div class="row">
+
+  <h1><button type="button" class="btn btn-default btn-sm">
+  <span class="glyphicon glyphicon-star" aria-hidden="true"></button></span> {{ glyph.name }}</h1>
+
+      <p>Associated SBO terms: {{ glyph.sbo_term }}.</p>
+      <p>Creator: {{ glyph.user.username }}.</p>
+      <p>Star Score: 2</p>
+    </div>
+
+<div class="row">
+<p> put the image here {{ glyph.file_name }} </p>
+
+<button type="button" class="btn btn-primary">Download</button>
+</div>
+
+</div>
+{% endblock %}
+

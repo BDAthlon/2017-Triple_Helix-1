@@ -5,9 +5,10 @@
 <div class="jumbotron">
 
   <h1>Welcome to the Glyphrepository</h1>
+</div><!-- /.jumbotron -->
 
 <div id="glyphs-search-table">
-     <input type="text" id="myInput" class="form-control" onkeyup="search_glyph_table()" placeholder="Filter by SBO term...">
+     <input type="text" id="myInput" class="form-control, input-lg" onkeyup="search_glyph_table()" placeholder="Filter by SBO term...">
     <div class="pre-scrollable">
     <table id="myTable" class='table'>
       <tr class="header">
@@ -16,69 +17,19 @@
         <th style="width:30%;">SBO Terms</th>
         <th style="width:30%;">Creator</th>
       </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>Cool-Promoter</td>
-        <td>Promoter, Inducible</td>
-        <td>Batman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>Sweet-RBS</td>
-        <td>RBS, UTR</td>
-        <td>Batwoman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>GFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>RFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>BFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
-      <tr>
-        <td>Small image comes here</td>
-        <td>YFP</td>
-        <td>CDS</td>
-        <td>Superman</td>
-      </tr>
+       <tbody>
+        {% for glyph in glyphs %}
+          <tr>
+              <td class="col-sm-1"> {{ glyph.file_name }} </th>
+              <td class="col-sm-2"> {{ glyph.name }} </td>
+              <td class="col-sm-2"> {{ glyph.sbo_term }} </td>
+              <td class="col-sm-2"> {{ glyph.user.username }} </td>
+         </tr>
+        {% endfor %}
+      </tbody>
     </table> 
     </div>
 </div>
-</div><!-- /.jumbotron -->
 
-<div class="body-content">
-  <div class="row">
-    <div class="col-lg-4">
-      <h2><i class="fa fa-code"></i> Bootstrap 3</h2>
-      <p>Sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.</p>
-      <p><a class="btn btn-default" href="http://getbootstrap.com/">Official website &raquo;</a></p>
-    </div>
-    <div class="col-lg-4">
-      <h2><i class="fa fa-flask"></i> SQLAlchemy</h2>
-      <p>SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.</p>
-      <p><a href="http://www.sqlalchemy.org/" class="btn btn-default">Official website &raquo;</a></p>
-   </div>
-    <div class="col-lg-4">
-      <h2><i class="fa fa-edit"></i> WTForms</h2>
-      <p>WTForms is a flexible forms validation and rendering library for python web development.</p>
-      <p><a href="http://wtforms.simplecodes.com/" class="btn btn-default">Official website &raquo;</a></p>
-    </div>
-  </div><!-- /.row -->
-</div>
-<div>
-<p>This is a starter Flask template. It includes Bootstrap 3, jQuery 2, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.</p>
-<p><a href="https://github.com/sloria/cookiecutter-flask" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
 {% endblock %}
 
