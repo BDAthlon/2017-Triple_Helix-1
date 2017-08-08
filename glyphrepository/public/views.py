@@ -9,6 +9,8 @@ from glyphrepository.user.forms import RegisterForm
 from glyphrepository.user.models import User
 from glyphrepository.utils import flash_errors
 
+from glyphrepository.glyph.models import Glyph
+
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
 
@@ -31,8 +33,8 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    return render_template('public/home.html', form=form)
 
+    return render_template('public/home.html', form=form, glyphs=Glyph.query.all())
 
 @blueprint.route('/logout/')
 @login_required
