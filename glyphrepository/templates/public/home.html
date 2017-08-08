@@ -4,15 +4,11 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
 
-  <h1>Welcome to glyphrepository Site</h1>
-
-  <p>This is a starter Flask template. It includes Bootstrap 3, jQuery 2, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.</p>
-  <p><a href="https://github.com/sloria/cookiecutter-flask" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div><!-- /.jumbotron -->
+  <h1>Welcome to the Glyphrepository</h1>
 
 <div id="glyphs-search-table">
-     <input type="text" id="myInput" onkeyup="search_glyph_table()" placeholder="Filter by SBO term...">
-
+     <input type="text" id="myInput" class="form-control" onkeyup="search_glyph_table()" placeholder="Filter by SBO term...">
+    <div class="pre-scrollable">
     <table id="myTable" class='table'>
       <tr class="header">
         <th style="width:10%;">Icon</th>
@@ -32,8 +28,34 @@
         <td>RBS, UTR</td>
         <td>Batwoman</td>
       </tr>
+      <tr>
+        <td>Small image comes here</td>
+        <td>GFP</td>
+        <td>CDS</td>
+        <td>Superman</td>
+      </tr>
+      <tr>
+        <td>Small image comes here</td>
+        <td>RFP</td>
+        <td>CDS</td>
+        <td>Superman</td>
+      </tr>
+      <tr>
+        <td>Small image comes here</td>
+        <td>BFP</td>
+        <td>CDS</td>
+        <td>Superman</td>
+      </tr>
+      <tr>
+        <td>Small image comes here</td>
+        <td>YFP</td>
+        <td>CDS</td>
+        <td>Superman</td>
+      </tr>
     </table> 
+    </div>
 </div>
+</div><!-- /.jumbotron -->
 
 <div class="body-content">
   <div class="row">
@@ -53,6 +75,10 @@
       <p><a href="http://wtforms.simplecodes.com/" class="btn btn-default">Official website &raquo;</a></p>
     </div>
   </div><!-- /.row -->
+</div>
+<div>
+<p>This is a starter Flask template. It includes Bootstrap 3, jQuery 2, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.</p>
+<p><a href="https://github.com/sloria/cookiecutter-flask" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
 {% endblock %}
 
