@@ -2,10 +2,10 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
-from wedding import commands, public, user
-from wedding.assets import assets
-from wedding.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
-from wedding.settings import ProdConfig
+from glyphrepository import commands, public, user
+from glyphrepository.assets import assets
+from glyphrepository.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
+from glyphrepository.settings import ProdConfig
 
 
 def create_app(config_object=ProdConfig):

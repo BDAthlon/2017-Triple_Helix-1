@@ -3,11 +3,11 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user
 
-from wedding.extensions import login_manager
-from wedding.public.forms import LoginForm
-from wedding.user.forms import RegisterForm
-from wedding.user.models import User
-from wedding.utils import flash_errors
+from glyphrepository.extensions import login_manager
+from glyphrepository.public.forms import LoginForm
+from glyphrepository.user.forms import RegisterForm
+from glyphrepository.user.models import User
+from glyphrepository.utils import flash_errors
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
