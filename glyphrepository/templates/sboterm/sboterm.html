@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+    {% if glyphs %}
+
+        {% if (glyphs | length) == 1 %}
+            <h1> 1 glyph for {{ sboterm.name }} ({{ sboterm.get_full_id() }}) </h1>
+        {% else %}
+            <h1> {{ glyphs | length }} glyphs submitted for {{ sboterm.name }} ({{ sboterm.get_full_id() }}) </h1>
+        {% endif %}
+
+        <p>See the <a href="https://www.ebi.ac.uk/sbo/main/{{ sboterm.get_full_id() }}">entry for {{ sboterm.get_full_id() }}</a>
+         on the Systems Biology Ontology website.</p>
+
+        {% include "glyph-table.html" %}
+
+    {% else %}
+        <h1>No glyphs submitted for {{ sboterm.name }} ({{ sboterm.get_full_id()  }}) </h1>
+    {% endif %}
+{% endblock %}
+
+{% block body_other %} onload="$('#glyph-table-inner').css('max-height',$(window).height() - 475);" {% endblock %}
