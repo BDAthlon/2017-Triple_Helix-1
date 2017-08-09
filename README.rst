@@ -2,8 +2,13 @@
 SynBio Glyph repository
 ===============================
 
-This is a repository of glyphs used to represent components in synthetic biology.
+A Registry of Synthetic Biology Glyphs, created for the IWBDA 2017 BDAthlon competition
 
+It was built using Flask as a web framework, SQLAlchemy as an ORM layer, and various Flask packages (most notably
+Flask-Login, WTForms and Flask-WTF, but see ``requirements/prod.txt`` for a complete list). The front-end uses Boostrap
+for layout, FontAwesome for icons, jQuery as a dependendy for Bootstrap, and the selectize library for fuzzy-filtering
+of lists. As a starting point, :cookiecutter-flask:`https://github.com/sloria/cookiecutter-flask` was used to create the
+boilerplate for a site with user management but no other interactivity.
 
 Quickstart
 ----------
