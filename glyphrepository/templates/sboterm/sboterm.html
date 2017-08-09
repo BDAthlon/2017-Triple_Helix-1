@@ -10,14 +10,19 @@
             <h1> {{ glyphs | length }} glyphs submitted for {{ sboterm.name }} ({{ sboterm.get_full_id() }}) </h1>
         {% endif %}
 
-        <p>See the <a href="https://www.ebi.ac.uk/sbo/main/{{ sboterm.get_full_id() }}">entry for {{ sboterm.get_full_id() }}</a>
-         on the Systems Biology Ontology website.</p>
-
-        {% include "glyph-table.html" %}
-
     {% else %}
         <h1>No glyphs submitted for {{ sboterm.name }} ({{ sboterm.get_full_id()  }}) </h1>
     {% endif %}
+
+
+
+    <blockquote>{{ sboterm.definition }}<footer style="margin-top: 20px;"><cite>entry for <a href="https://www.ebi.ac.uk/sbo/main/{{ sboterm.get_full_id() }}"> {{ sboterm.get_full_id() }}</a>
+         on the Systems Biology Ontology website</cite></footer></blockquote>
+
+    {% if (glyphs | length) > 0 %}
+        {% include "glyph-table.html" %}
+    {% endif %}
+
 {% endblock %}
 
 {% block body_other %} onload="$('#glyph-table-inner').css('max-height',$(window).height() - 475);" {% endblock %}
