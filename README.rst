@@ -10,6 +10,33 @@ for layout, FontAwesome for icons, jQuery as a dependendy for Bootstrap, and the
 of lists. As a starting point, `cookiecutter-flask https://github.com/sloria/cookiecutter-flask`_ was used to create the
 boilerplate for a site with user management but no other interactivity.
 
+Project Structure
+-----------------
+The project consists of many files. These are some of the most significant ones:
+
+autoapp.py    - main entrypoint that creates an application instance
+requirements/ - list of project requirements in format readable by ``pip -r``
+
+glyphrepository/
+    app.py      - app factory function
+    assets.py   - lists JS and CSS files to be included
+    settings.py - main configuration file
+    static/     - JS and CSS files, as well as the images of glyphs
+    templates/  - directory of template files (in Jinja2 format)
+
+The bulk of the non-boilerplate code is in one of:
+
+    comment/
+    glyph/
+    public/
+    sboterm/
+    user/
+
+which contain a ``model.py`` file (which defines a database table using SQLAlchemy), a ``forms.py`` file, and a ``views.py``
+file (which defines the routes/URLs for the application, and the functions that actually handle requests).
+
+
+
 Quickstart
 ----------
 
