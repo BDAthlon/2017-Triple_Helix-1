@@ -8,7 +8,7 @@ from glyphrepository.comment.models import Comment
 
 from glyphrepository.glyph.forms import AddGlyphForm
 from glyphrepository.comment.forms import CommentForm
-
+from glyphrepository.sboterm.models import SBOterm
 from flask_login import login_required, current_user
 
 from flask import current_app as app
@@ -90,7 +90,10 @@ def edit_glyph_comment(glyph_id):
 @login_required
 def add_glyph():
     """Add new glyph."""
+
     form = AddGlyphForm(request.form)
+    form.sboTerm.choices =  map(lambda term: (term.id, term.name), SBOterm.query.all())
+
     if form.validate_on_submit() and request.method == 'POST':
 
         f = request.files["file_path"]

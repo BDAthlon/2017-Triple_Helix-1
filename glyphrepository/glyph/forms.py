@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Glyph forms."""
 from flask_wtf import Form
-from wtforms import StringField, FileField
+from wtforms import StringField, FileField, SelectField
 from wtforms.validators import DataRequired
 
 
@@ -9,9 +9,8 @@ class AddGlyphForm(Form):
     """Form to add a new glyph."""
 
     name = StringField('Glyph name', validators=[DataRequired()])
-    sboTerm = StringField('SBO term')
+    sboTerm = SelectField('SBO term', choices=[])
     file_path = FileField()
-
 
     def __init__(self, *args, **kwargs):
         """Create instance."""
