@@ -1,12 +1,12 @@
 <div id="glyph-table">
     <input type="text" id="myInput" class="form-control, input-lg" onkeyup="search_glyph_table()"
-           placeholder="Filter by SBO term...">
+           placeholder="Filter by SO term...">
     <div id="glyph-table-inner" class="pre-scrollable">
         <table id="myTable" class='table'>
             <tr class="header">
                 <th style="width:10%;">Icon</th>
                 <th style="width:30%;">Name</th>
-                <th style="width:30%;"><a href="https://www.ebi.ac.uk/sbo/main/;jsessionid=75847DD41F5672AD085CBEF6679A3CE6">SBO Terms</a></th>
+                <th style="width:30%;"><a href="http://www.sequenceontology.org/">SO Terms</a></th>
                 <th style="width:30%;">Average Rating</th>
                 <th style="width:30%;">Creator</th>
             </tr>
@@ -16,7 +16,7 @@
                     <td class="col-sm-1"><a href="/glyph/{{ glyph.id }}"><img src= "static/glyphs/{{glyph.file_name}}" alt="{{ glyph.name }}" style="width:100%" class="img-rounded"></a>
                     </th>
                     <td class="col-sm-2"> <a href="/glyph/{{ glyph.id }}">{{ glyph.name }}</a> </td>
-                    <td class="col-sm-2"> <a href="/sboterm/{{ glyph.sboterm.get_full_id() }}"> {{ glyph.sboterm.name }} ({{ glyph.sboterm.get_full_id()  }})</a> </td>
+                    <td class="col-sm-2"> <a href="/soterm/{{ glyph.soterm.get_full_id() }}"> {{ glyph.soterm.name }} ({{ glyph.soterm.get_full_id()  }})</a> </td>
                     <td class="col-sm-2"> {{ glyph.average_rating() }} </td>
                     <td class="col-sm-2"> <a href="/users/{{ glyph.user.id }}">{{ glyph.user.username }}</a> </td>
                 </tr>

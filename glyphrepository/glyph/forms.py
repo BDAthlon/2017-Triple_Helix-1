@@ -9,7 +9,7 @@ class AddGlyphForm(Form):
     """Form to add a new glyph."""
 
     name = StringField('Glyph name', validators=[DataRequired()])
-    sboTerm = SelectField('SBO term', choices=[])
+    soTerm = SelectField('SO term', choices=[])
     file_path = FileField()
 
     def __init__(self, *args, **kwargs):

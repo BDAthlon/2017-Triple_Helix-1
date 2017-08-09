@@ -8,7 +8,7 @@ from glyphrepository.comment.models import Comment
 
 from glyphrepository.glyph.forms import AddGlyphForm
 from glyphrepository.comment.forms import CommentForm
-from glyphrepository.sboterm.models import SBOterm
+from glyphrepository.soterm.models import SOterm
 from flask_login import login_required, current_user
 
 from flask import current_app as app
@@ -92,14 +92,14 @@ def add_glyph():
     """Add new glyph."""
 
     form = AddGlyphForm(request.form)
-    form.sboTerm.choices = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SBOterm.query.all())
+    form.soTerm.choices = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SOterm.query.all())
 
     if form.validate_on_submit() and request.method == 'POST':
         f = request.files["file_path"]
         file_name = f.filename
 
         if allowed_file(file_name):
-            new_glyph = Glyph.create(name=form.name.data, file_name='', sboterm_id=form.sboTerm.data,  user_id = current_user.id)
+            new_glyph = Glyph.create(name=form.name.data, file_name='', soterm_id=form.soTerm.data,  user_id = current_user.id)
 
             UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
             file_extension = os.path.splitext(file_name)[-1]

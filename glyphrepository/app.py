@@ -2,14 +2,14 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
-from glyphrepository import commands, public, user, comment, glyph, sboterm
+from glyphrepository import commands, public, user, comment, glyph, soterm
 from glyphrepository.assets import assets
 from glyphrepository.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from glyphrepository.settings import ProdConfig
 
 from glyphrepository.comment.models import Comment
 from glyphrepository.glyph.models import Glyph
-from glyphrepository.sboterm.models import SBOterm
+from glyphrepository.soterm.models import SOterm
 
 
 def create_app(config_object=ProdConfig):
@@ -45,7 +45,7 @@ def register_blueprints(app):
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(glyph.views.blueprint)
-    app.register_blueprint(sboterm.views.blueprint)
+    app.register_blueprint(soterm.views.blueprint)
 
     return None
 

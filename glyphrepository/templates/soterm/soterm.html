@@ -5,18 +5,18 @@
     {% if glyphs %}
 
         {% if (glyphs | length) == 1 %}
-            <h1> 1 glyph for {{ sboterm.name }} ({{ sboterm.get_full_id() }}) </h1>
+            <h1> 1 glyph for {{ soterm.name }} ({{ soterm.get_full_id() }}) </h1>
         {% else %}
-            <h1> {{ glyphs | length }} glyphs submitted for {{ sboterm.name }} ({{ sboterm.get_full_id() }}) </h1>
+            <h1> {{ glyphs | length }} glyphs submitted for {{ soterm.name }} ({{ soterm.get_full_id() }}) </h1>
         {% endif %}
 
     {% else %}
-        <h1>No glyphs submitted for {{ sboterm.name }} ({{ sboterm.get_full_id()  }}) </h1>
+        <h1>No glyphs submitted for {{ soterm.name }} ({{ soterm.get_full_id()  }}) </h1>
     {% endif %}
 
 
 
-    <blockquote>{{ sboterm.definition }}<footer style="margin-top: 20px;"><cite>entry for <a href="https://www.ebi.ac.uk/sbo/main/{{ sboterm.get_full_id() }}"> {{ sboterm.get_full_id() }}</a>
+    <blockquote>{{ soterm.definition }}<footer style="margin-top: 20px;"><cite>entry for <a href="http://www.sequenceontology.org/browser/current_svn/term/{{ soterm.get_full_id() }}"> {{ soterm.get_full_id() }}</a>
          on the Systems Biology Ontology website</cite></footer></blockquote>
 
     {% if (glyphs | length) > 0 %}

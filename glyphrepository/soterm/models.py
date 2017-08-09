@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-"""SBO term models."""
+"""BO term models."""
 
 from glyphrepository.database import Column, Model, SurrogatePK, db, reference_col, relationship
 
-class SBOterm(SurrogatePK, Model):
+class SOterm(SurrogatePK, Model):
     """A glyph."""
 
-    __tablename__ = 'sboterms'
+    __tablename__ = 'soterms'
     name = Column(db.String(80), unique=False, nullable=False)
     definition = Column(db.String(500), unique=False, nullable=False)
 
-    is_a = reference_col('sboterms', nullable=True)
-    parent = relationship('SBOterm')
+    is_a = reference_col('soterms', nullable=True)
+    parent = relationship('SOterm')
 
     def __init__(self, name, **kwargs):
         """Create instance."""
@@ -22,4 +22,4 @@ class SBOterm(SurrogatePK, Model):
         return '<Role({name})>'.format(name=self.name)
 
     def get_full_id(self):
-        return "SBO:" + str(self.id).zfill(7)
+        return "SO:" + str(self.id).zfill(7)

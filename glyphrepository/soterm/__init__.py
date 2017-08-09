@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
-"""The sboterm module."""
+"""The soterm module."""
 from . import views  # noqa
