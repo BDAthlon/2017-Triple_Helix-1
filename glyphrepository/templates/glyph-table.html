@@ -16,9 +16,9 @@
                     <td class="col-sm-1"><a href="/glyph/{{ glyph.id }}"><img src= "static/glyphs/{{glyph.file_name}}" alt="{{ glyph.name }}" style="width:100%" class="img-rounded"></a>
                     </th>
                     <td class="col-sm-2"> <a href="/glyph/{{ glyph.id }}">{{ glyph.name }}</a> </td>
-                    <td class="col-sm-2"> {{ glyph.sbo_term }} </td>
+                    <td class="col-sm-2"> <a href="https://www.ebi.ac.uk/sbo/main/{{ glyph.sboterm.get_full_id() }}"> {{ glyph.sboterm.name }} ({{ glyph.sboterm.get_full_id()  }})</a> </td>
                     <td class="col-sm-2"> {{ glyph.average_rating() }} </td>
-                    <td class="col-sm-2"> <a href="users/{{ glyph.user.id }}">{{ glyph.user.username }}</a> </td>
+                    <td class="col-sm-2"> <a href="/users/{{ glyph.user.id }}">{{ glyph.user.username }}</a> </td>
                 </tr>
             {% endfor %}
             </tbody>

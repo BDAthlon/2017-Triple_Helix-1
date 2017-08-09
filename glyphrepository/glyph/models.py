@@ -11,7 +11,8 @@ class Glyph(SurrogatePK, Model):
     name = Column(db.String(80), unique=False, nullable=False)
     file_name = Column(db.String(80), unique=False, nullable=False)
 
-    sbo_term = Column(db.String(80), unique=False, nullable=False)
+    sboterm_id = reference_col('sboterms', nullable=True)
+    sboterm = relationship('SBOterm', backref='glyphs')
 
     user_id = reference_col('users', nullable=True)
     user = relationship('User', backref='glyphs')

@@ -21,3 +21,5 @@ class SBOterm(SurrogatePK, Model):
         """Represent instance as a unique string."""
         return '<Role({name})>'.format(name=self.name)
 
+    def get_full_id(self):
+        return "SBO:" + str(self.id).zfill(7)
