@@ -12,19 +12,19 @@ boilerplate for a site with user management but no other interactivity.
 
 Project Structure
 -----------------
-The project consists of many files. These are some of the most significant ones:
+The project consists of many files. These are some of the most significant ones ::
 
-autoapp.py    - main entrypoint that creates an application instance
-requirements/ - list of project requirements in format readable by ``pip -r``
+    autoapp.py    - main entrypoint that creates an application instance
+    requirements/ - list of project requirements in format readable by ``pip -r``
 
-glyphrepository/
-    app.py      - app factory function
-    assets.py   - lists JS and CSS files to be included
-    settings.py - main configuration file
-    static/     - JS and CSS files, as well as the images of glyphs
-    templates/  - directory of template files (in Jinja2 format)
+    glyphrepository/
+        app.py      - app factory function
+        assets.py   - lists JS and CSS files to be included
+        settings.py - main configuration file
+        static/     - JS and CSS files, as well as the images of glyphs
+        templates/  - directory of template files (in Jinja2 format)
 
-The bulk of the non-boilerplate code is in one of:
+    The bulk of the non-boilerplate code is in one of:
 
     comment/
     glyph/
