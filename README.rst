@@ -1,19 +1,21 @@
 ===============================
-glyphrepository Site
+SynBio Glyph repository
 ===============================
 
-glyphrepository website
+This is a repository of glyphs used to represent components in synthetic biology.
 
 
 Quickstart
 ----------
 
-First, set your app's secret key as an environment variable. For example,
-add the following to ``.bashrc`` or ``.bash_profile``.
+This project is written in Python using the Flask framework. If you have Python and pip installed, you can get the code
+and install its dependencies (including Flask) ::
 
-.. code-block:: bash
+    git clone https://github.com/BDAthlon/2017-Triple_Helix-1
+    cd glyphrepository
+    pip install -r requirements/dev.txt
 
-    export glyphrepository_SECRET='something-really-secret'
+
 
 Before running shell commands, set the ``FLASK_APP`` and ``FLASK_DEBUG``
 environment variables ::
@@ -21,18 +23,8 @@ environment variables ::
     export FLASK_APP=/path/to/autoapp.py
     export FLASK_DEBUG=1
 
-Then run the following commands to bootstrap your environment ::
-
-    git clone https://github.com/jamesscottbrown/glyphrepository
-    cd glyphrepository
-    pip install -r requirements/dev.txt
-    bower install
-    flask run
-
-You will see a pretty welcome screen.
-
-Once you have installed your DBMS, run the following to create your app's
-database tables and perform the initial migration ::
+You then need to setup the database. The repository includes a SQLite database (``dev.db``) that should `just work'
+when debugging mode is enabled, but you can alternatively created the database from scratch ::
 
     flask db init
     flask db migrate
@@ -40,8 +32,26 @@ database tables and perform the initial migration ::
     flask run
 
 
+You will then also need to load the SBO data in ``sbo.sql`` into the database.
+
+
+You can then run the site using ::
+
+    flask run
+
+and nvaigate to ``127.0.0.1:5000`` in your favourite browser.
+
+
 Deployment
 ----------
+
+You need to set a secret key as an environment variable. For example,
+add the following to ``.bashrc`` or ``.bash_profile``.
+
+.. code-block:: bash
+
+    export glyphrepository_SECRET='something-really-secret'
+
 
 In your production environment, make sure the ``FLASK_DEBUG`` environment
 variable is unset or is set to ``0``, so that ``ProdConfig`` is used.
@@ -59,6 +69,7 @@ By default, you will have access to the flask ``app``.
 
 Running Tests
 -------------
+This project was written quickly at a hackathon, so contains few tests; only those that came with the scaffolding.
 
 To run all tests, run ::
 
