@@ -29,7 +29,7 @@ The project consists of many files. These are some of the most significant ones 
     comment/
     glyph/
     public/
-    sboterm/
+    soterm/
     user/
 
 which contain a ``model.py`` file (which defines a database table using SQLAlchemy), a ``forms.py`` file, and a ``views.py``
@@ -64,7 +64,7 @@ when debugging mode is enabled, but you can alternatively created the database f
     flask run
 
 
-You will then also need to load the SBO data in ``sbo.sql`` into the database.
+You will then also need to load the SO data in ``so.sql`` into the database.
 
 
 You can then run the site using ::
