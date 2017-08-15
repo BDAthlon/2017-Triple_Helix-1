@@ -6,9 +6,10 @@
             <tr class="header">
                 <th style="width:10%;">Icon</th>
                 <th style="width:30%;">Name</th>
+                <th style="width:30%;"><abbr title="Glyphs begin as 'Proposed', are 'Endorsed' once they are recommended for use, and are 'Adopted' when they become part of the official standard">SBOL Status</abbr></th>
                 <th style="width:30%;"><a href="http://www.sequenceontology.org/">SO Terms</a></th>
                 <th style="width:30%;">Average Rating</th>
-                <th style="width:30%;">Creator</th>
+                <th style="width:30%;"><abbr title="Note that this may not be the original creator">Uploaded by</abbr></th>
             </tr>
             <tbody>
             {% for glyph in glyphs %}
@@ -16,7 +17,8 @@
                     <td class="col-sm-1"><a href="/glyph/{{ glyph.id }}"><img src= "static/glyphs/{{glyph.file_name}}" alt="{{ glyph.name }}" style="width:100%" class="img-rounded"></a>
                     </th>
                     <td class="col-sm-2"> <a href="/glyph/{{ glyph.id }}">{{ glyph.name }}</a> </td>
-                    <td class="col-sm-2"> <a href="/soterm/{{ glyph.soterm.get_full_id() }}"> {{ glyph.soterm.name }} ({{ glyph.soterm.get_full_id()  }})</a> </td>
+                    <td class="col-sm-2"> {{ glyph.sbol_status }} </td>
+                    <td class="col-sm-2"> {{ glyph.get_soterm_link() | safe }}</td>
                     <td class="col-sm-2"> {{ glyph.average_rating() }} </td>
                     <td class="col-sm-2"> <a href="/users/{{ glyph.user.id }}">{{ glyph.user.username }}</a> </td>
                 </tr>

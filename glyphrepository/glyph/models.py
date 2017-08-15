@@ -41,3 +41,10 @@ class Glyph(SurrogatePK, Model):
             return ""
         else:
             return "%.1f" % (sum(ratings) / len(ratings))
+
+    def get_soterm_link(self):
+        if self.soterm:
+            full_id = self.soterm.get_full_id()
+            return '<a href="/soterm/%s"> %s (%s)</a>' % (full_id, self.soterm.name, full_id)
+        else:
+            return ""
