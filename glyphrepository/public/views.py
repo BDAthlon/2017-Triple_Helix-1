@@ -34,7 +34,7 @@ def home():
         else:
             flash_errors(form)
 
-    return render_template('public/home.html', form=form, glyphs=Glyph.query.all())
+    return render_template('public/home.html', form=form, glyphs=Glyph.query.order_by(Glyph.user_id.asc()).all())
 
 @blueprint.route('/logout/')
 @login_required
