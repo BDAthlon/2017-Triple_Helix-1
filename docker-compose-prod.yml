@@ -1,0 +1,12 @@
+# See https://docs.docker.com/compose/extends/#example-use-case
+
+glyphs:
+  ports:
+    - "4006:5000"
+  restart: always
+  environment:
+    FLASK_DEBUG: 0
+    glyphrepository_SECRET: 'THE_SUPER_SECRET_PASSWORD'
+  working_dir: /code/glyphrepository
+  command: gunicorn -w 4 -b 0.0.0.0:5000 --pythonpath '/code,/code/glyphrepository' 'app:create_app()'
+
