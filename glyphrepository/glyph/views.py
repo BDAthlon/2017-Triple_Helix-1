@@ -99,7 +99,9 @@ def add_glyph():
         file_name = f.filename
 
         if allowed_file(file_name):
-            new_glyph = Glyph.create(name=form.name.data, file_name='', soterm_id=form.soTerm.data,  user_id = current_user.id)
+            new_glyph = Glyph.create(name=form.name.data, file_name='', soterm_id=form.soTerm.data,
+                                     user_id=current_user.id, proposal_url=form.proposal_url.data,
+                                     sbol_status=form.sbol_status.data)
 
             UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
             file_extension = os.path.splitext(file_name)[-1]

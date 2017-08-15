@@ -24,8 +24,21 @@
                 {{form.file_path(placeholder="FILE path", class_="form-control")}}
             </div>
 
+            <div class="form-group">
+                {{form.sbol_status.label}}
+                {{form.sbol_status(class_="form-control")}}
+                <p class="help-block">Glyphs begin as 'Proposed', are 'Endorsed' once they are recommended for use, and are 'Adopted' when they become part of the official standard.</p>
+            </div>
+
+            <div class="form-group">
+                {{form.proposal_url.label}}
+                {{form.proposal_url(placeholder="", class_="form-control")}}
+            </div>
+
             <p><input class="btn btn-default btn-submit" type="submit" value="Add Glyph"></p>
     </form>
+
+    <p>If you are adding a new Glyph that you wish to be considered for inclusion in SBOLv standard, you should follow the <a href="https://docs.google.com/document/d/1hPuvkAQY0pU3xRNMNWMMq7wDGqanYes4SF4CSjuugBU/">official proposal procedure</a></p>
 
 </div>
 {% endblock %}

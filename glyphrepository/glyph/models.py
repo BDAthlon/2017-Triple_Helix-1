@@ -11,6 +11,9 @@ class Glyph(SurrogatePK, Model):
     name = Column(db.String(80), unique=False, nullable=False)
     file_name = Column(db.String(80), unique=False, nullable=False)
 
+    sbol_status = Column(db.String(80), unique=False, nullable=True)
+    proposal_url = Column(db.String(80), unique=False, nullable=True)
+
     soterm_id = reference_col('soterms', nullable=True)
     soterm = relationship('SOterm', backref='glyphs')
 
