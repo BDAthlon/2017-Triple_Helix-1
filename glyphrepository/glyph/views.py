@@ -119,6 +119,48 @@ def add_glyph():
     return render_template('glyph/add-glyph.html', form=form)
 
 
+
+@blueprint.route('/<glyph_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_glyph(glyph_id):
+    """Edit glyph."""
+
+    glyph = Glyph.query.filter(Glyph.id == glyph_id).first()
+
+    if current_user != glyph.user:
+        flash('Cannot edit - not your glyph!.', 'warning')
+        return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
+
+    form = AddGlyphForm(request.form, name=glyph.name, soTerm=glyph.soterm, sbol_status=glyph.sbol_status, proposal_url=glyph.proposal_url)
+    form.soTerm.choices = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SOterm.query.all())
+
+    if form.validate_on_submit() and request.method == 'POST':
+
+        glyph.update(name=form.name.data, soterm_id=form.soTerm.data, proposal_url=form.proposal_url.data,
+                     sbol_status=form.sbol_status.data)
+
+        f = request.files["file_path"]
+        file_name = f.filename
+
+        if allowed_file(file_name):
+            UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
+            file_extension = os.path.splitext(file_name)[-1]
+            filename = str(glyph_id) + file_extension
+
+            f.save(os.path.join(UPLOAD_FOLDER, filename))
+            glyph.file_name = filename
+
+        glyph.save()
+
+        flash('Glyph successfully updated.', 'success')
+        return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
+
+    else:
+        flash_errors(form)
+
+    return render_template('glyph/edit-glyph.html', form=form)
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])

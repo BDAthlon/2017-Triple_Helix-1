@@ -20,7 +20,13 @@
 
       <p>Average rating: {{ glyph.average_rating() }}</p>
       <p><abbr title="Note that this may not be the original creator">Uploaded by</abbr>: <a href="/users/{{ glyph.user.id }}">{{ glyph.user.username }}</a></p>
-        <p><a href="static/glyphs/{{glyph.file_name}}" class="btn btn-primary" role="button" download={{glyph.file_name}} target="_blank">Download</a> <a href="./{{ glyph.id}}/comment" class="btn btn-default" role="button">Rate/Comment</a></p>
+        <p><a href="static/glyphs/{{glyph.file_name}}" class="btn btn-primary" role="button" download={{glyph.file_name}} target="_blank">Download</a>
+            {% if glyph.user == current_user %}
+                <a href="./{{ glyph.id}}/edit" class="btn btn-default" role="button">Edit</a>
+            {% endif %}
+
+            <a href="./{{ glyph.id}}/comment" class="btn btn-default" role="button">Rate/Comment</a>
+        </p>
       </div>
     </div>
   </div>
