@@ -158,7 +158,7 @@ def edit_glyph(glyph_id):
     else:
         flash_errors(form)
 
-    return render_template('glyph/edit-glyph.html', form=form)
+    return render_template('glyph/edit-glyph.html', form=form, glyph=glyph)
 
 
 def allowed_file(filename):

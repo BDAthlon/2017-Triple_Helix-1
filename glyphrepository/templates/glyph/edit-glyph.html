@@ -45,4 +45,4 @@
 
 
 
-{% block body_other %} onload="$('#soTerm').selectize();"{% endblock %}
+{% block body_other %} onload=" var selectBox = $('#soTerm').selectize(); selectBox[0].selectize.setValue('{{ glyph.soterm_id }}') ;"{% endblock %}
