@@ -95,24 +95,34 @@ def add_glyph():
     form.soTerm.choices = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SOterm.query.all())
 
     if form.validate_on_submit() and request.method == 'POST':
-        f = request.files["file_path"]
-        file_name = f.filename
 
-        if allowed_file(file_name):
-            new_glyph = Glyph.create(name=form.name.data, file_name='', soterm_id=form.soTerm.data,
-                                     user_id=current_user.id, proposal_url=form.proposal_url.data,
-                                     sbol_status=form.sbol_status.data)
+        new_glyph = Glyph.create(name=form.name.data, file_name='', soterm_id=form.soTerm.data,
+                                 user_id=current_user.id, proposal_url=form.proposal_url.data,
+                                 sbol_status=form.sbol_status.data)
 
-            UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
-            file_extension = os.path.splitext(file_name)[-1]
-            filename = str(new_glyph.id) + file_extension
+        valid_file = False
+        for i in range(1, 5):
 
-            f.save(os.path.join(UPLOAD_FOLDER, filename))
-            new_glyph.file_name = filename
-            new_glyph.save()
+            f = request.files["file_path" + str(i)]
+            file_name = f.filename
 
+            if allowed_file(file_name):
+                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
+                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
+                filename = str(new_glyph.id) + file_extension
+
+                f.save(os.path.join(UPLOAD_FOLDER, filename))
+                new_glyph.record_file(file_extension)
+                valid_file = True
+
+        if not valid_file:
+            new_glyph.delete()
+            flash('No file found.', 'warning')
+            return redirect(url_for('glyph.home'))
+        else:
             flash('Glyph successfully added.', 'success')
             return redirect(url_for('glyph.show_glyph', glyph_id=new_glyph.id))
+
     else:
         flash_errors(form)
 
@@ -127,7 +137,7 @@ def edit_glyph(glyph_id):
 
     glyph = Glyph.query.filter(Glyph.id == glyph_id).first()
 
-    if current_user != glyph.user:
+    if current_user != glyph.user and not current_user.is_admin:
         flash('Cannot edit - not your glyph!.', 'warning')
         return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
 
@@ -139,16 +149,18 @@ def edit_glyph(glyph_id):
         glyph.update(name=form.name.data, soterm_id=form.soTerm.data, proposal_url=form.proposal_url.data,
                      sbol_status=form.sbol_status.data)
 
-        f = request.files["file_path"]
-        file_name = f.filename
 
-        if allowed_file(file_name):
-            UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
-            file_extension = os.path.splitext(file_name)[-1]
-            filename = str(glyph_id) + file_extension
+        for i in range(1, 5):
+            f = request.files["file_path" + str(i)]
+            file_name = f.filename
 
-            f.save(os.path.join(UPLOAD_FOLDER, filename))
-            glyph.file_name = filename
+            if allowed_file(file_name):
+                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
+                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
+                filename = str(glyph_id) + file_extension
+
+                f.save(os.path.join(UPLOAD_FOLDER, filename))
+                glyph.record_file(file_extension)
 
         glyph.save()
 
@@ -163,4 +175,4 @@ def edit_glyph(glyph_id):
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
+           filename.rsplit('.', 1)[1].lower() in set(['pdf', 'png', 'jpg', 'jpeg', 'svg'])

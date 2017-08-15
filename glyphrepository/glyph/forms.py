@@ -14,7 +14,10 @@ class AddGlyphForm(Form):
                               choices=map(lambda x: (x, x),['Proposed', 'Endorsed', 'Adopted (recommended)', 'Adopted (alternative)']))
     proposal_url = StringField('URL of proposal google doc')
 
-    file_path = FileField()
+    file_path1 = FileField(label="Image")
+    file_path2 = FileField(label="Image")
+    file_path3 = FileField(label="Image")
+    file_path4 = FileField(label="Image")
 
     def __init__(self, *args, **kwargs):
         """Create instance."""

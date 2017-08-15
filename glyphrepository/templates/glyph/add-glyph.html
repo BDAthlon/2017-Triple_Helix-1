@@ -20,11 +20,6 @@
             </div>
 
             <div class="form-group">
-                {{form.file_path.label}}
-                {{form.file_path(placeholder="FILE path", class_="form-control")}}
-            </div>
-
-            <div class="form-group">
                 {{form.sbol_status.label}}
                 {{form.sbol_status(class_="form-control")}}
                 <p class="help-block">Glyphs begin as 'Proposed', are 'Endorsed' once they are recommended for use, and are 'Adopted' when they become part of the official standard.</p>
@@ -34,6 +29,31 @@
                 {{form.proposal_url.label}}
                 {{form.proposal_url(placeholder="", class_="form-control")}}
             </div>
+
+        <div style="border: solid #ddd; border-width: 1px; border-radius: 4px 4px 0 0; padding-left: 10px; margin-bottom: 10px;">
+              <div class="form-group">
+                {{form.file_path1.label}}
+                {{form.file_path1(placeholder="FILE path", class_="form-control")}}
+            </div>
+
+            <div class="form-group">
+                {{form.file_path2.label}}
+                {{form.file_path2(placeholder="FILE path", class_="form-control")}}
+            </div>
+
+            <div class="form-group">
+                {{form.file_path3.label}}
+                {{form.file_path3(placeholder="FILE path", class_="form-control")}}
+            </div>
+
+            <div class="form-group">
+                {{form.file_path4.label}}
+                {{form.file_path4(placeholder="FILE path", class_="form-control")}}
+            </div>
+
+            <p class="help-block">You can upload images in JPG, PDF, PNG, or SVG format. You must upload at least one image, and can upload zero or one files in each format.</p>
+        </div>
+
 
             <p><input class="btn btn-default btn-submit" type="submit" value="Add Glyph"></p>
     </form>

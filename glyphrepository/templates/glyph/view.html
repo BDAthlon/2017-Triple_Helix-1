@@ -9,24 +9,32 @@
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src= "static/glyphs/{{glyph.file_name}}" alt="{{ glyph.name }}">
+      <img src= "static/glyphs/{{ glyph.get_preferred_filename() }}" alt="{{ glyph.name }}">
       <div class="caption">
 	  <p>Associated SO terms: <a href="/soterm/{{ glyph.soterm.get_full_id() }}"> {{ glyph.soterm.name }} ({{ glyph.soterm.get_full_id()  }})</a></p>
       <p><abbr title="Glyphs begin as 'Proposed', are 'Endorsed' once they are recommended for use, and are 'Adopted' when they become part of the official standard">SBOL standard status</abbr>: {{ glyph.sbol_status }}</p>
 
       {%  if glyph.proposal_url %}
-          <p><a href="{{ glyph.proposal_url }}">SBOL standard proposal URL</a></p>
+          <p><a href="{{ glyph.proposal_url }}">SBOL standard proposal (Google Docs)</a></p>
       {% endif %}
 
       <p>Average rating: {{ glyph.average_rating() }}</p>
       <p><abbr title="Note that this may not be the original creator">Uploaded by</abbr>: <a href="/users/{{ glyph.user.id }}">{{ glyph.user.username }}</a></p>
-        <p><a href="static/glyphs/{{glyph.file_name}}" class="btn btn-primary" role="button" download={{glyph.file_name}} target="_blank">Download</a>
-            {% if glyph.user == current_user %}
+        <p>
+            {% if glyph.user == current_user or current_user.is_admin %}
                 <a href="./{{ glyph.id}}/edit" class="btn btn-default" role="button">Edit</a>
             {% endif %}
 
             <a href="./{{ glyph.id}}/comment" class="btn btn-default" role="button">Rate/Comment</a>
         </p>
+
+      <p>
+          {% if glyph.has_png %} <a href="static/glyphs/{{glyph.id}}.png" role="button" download="{{ glyph.name | replace(" ", "-") }}.png" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PNG</a>  {% endif %}
+          {% if glyph.has_pdf %} <a href="static/glyphs/{{glyph.id}}.pdf" role="button" download="{{ glyph.name | replace(" ", "-") }}.pdf" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PDF</a>  {% endif %}
+          {% if glyph.has_svg %} <a href="static/glyphs/{{glyph.id}}.svg" role="button" download="{{ glyph.name | replace(" ", "-") }}.svg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> SVG</a>  {% endif %}
+          {% if glyph.has_jpg %} <a href="static/glyphs/{{glyph.id}}.jpg" role="button" download="{{ glyph.name | replace(" ", "-") }}.jpg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> JPG</a>  {% endif %}
+      </p>
+
       </div>
     </div>
   </div>
