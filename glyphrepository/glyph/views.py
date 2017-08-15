@@ -92,7 +92,10 @@ def add_glyph():
     """Add new glyph."""
 
     form = AddGlyphForm(request.form)
-    form.soTerm.choices = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SOterm.query.all())
+
+    options = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SOterm.query.all())
+    options.append(("", ""))
+    form.soTerm.choices = options
 
     if form.validate_on_submit() and request.method == 'POST':
 
@@ -142,7 +145,10 @@ def edit_glyph(glyph_id):
         return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
 
     form = AddGlyphForm(request.form, name=glyph.name, soTerm=glyph.soterm, sbol_status=glyph.sbol_status, proposal_url=glyph.proposal_url)
-    form.soTerm.choices = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SOterm.query.all())
+
+    options = map(lambda term: (str(term.id), term.name + " (" + term.get_full_id() + ")"), SOterm.query.all())
+    options.append(("", ""))
+    form.soTerm.choices = options
 
     if form.validate_on_submit() and request.method == 'POST':
 

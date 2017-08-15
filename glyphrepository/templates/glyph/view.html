@@ -11,7 +11,7 @@
     <div class="thumbnail">
       <img src= "static/glyphs/{{ glyph.get_preferred_filename() }}" alt="{{ glyph.name }}">
       <div class="caption">
-	  <p>Associated SO terms: <a href="/soterm/{{ glyph.soterm.get_full_id() }}"> {{ glyph.soterm.name }} ({{ glyph.soterm.get_full_id()  }})</a></p>
+	  <p>Associated SO terms: {{ glyph.get_soterm_link() | safe }}</p>
       <p><abbr title="Glyphs begin as 'Proposed', are 'Endorsed' once they are recommended for use, and are 'Adopted' when they become part of the official standard">SBOL standard status</abbr>: {{ glyph.sbol_status }}</p>
 
       {%  if glyph.proposal_url %}
