@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-
+    <div style="padding-bottom: 10px">
         <h1>SynBio Glyph repository</h1>
 
         <p>Browse the collection of glyphs, or <a href="{{ url_for('public.register') }}">create an account</a> to comment or submit your own.</p>
@@ -14,4 +13,4 @@
 
 {% endblock %}
 
-{% block body_other %} onload="$('#glyph-table-inner').css('max-height',$(window).height() - 475);" {% endblock %}
+{% block body_other %} onload="$('#glyph-table-inner').css('max-height',$(window).height() - 250);" {% endblock %}
