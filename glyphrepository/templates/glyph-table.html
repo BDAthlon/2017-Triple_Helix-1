@@ -14,7 +14,7 @@
             <tbody>
             {% for glyph in glyphs %}
                 <tr>
-                    <td class="col-sm-1"><a href="/glyph/{{ glyph.id }}"><img src= "static/glyphs/{{ glyph.get_preferred_filename() }}" alt="{{ glyph.name }}" style="width:100%" class="img-rounded"></a>
+                    <td class="col-sm-1"><div class="icon-container"><a href="/glyph/{{ glyph.id }}"><img src= "static/glyphs/{{ glyph.get_preferred_filename() }}" alt="{{ glyph.name }}"></a></div>
                     </th>
                     <td class="col-sm-2"> <a href="/glyph/{{ glyph.id }}">{{ glyph.name }}</a> </td>
                     <td class="col-sm-2"> {{ glyph.sbol_status }} </td>
