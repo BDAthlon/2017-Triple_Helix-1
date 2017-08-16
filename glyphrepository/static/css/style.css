@@ -84,3 +84,15 @@ footer .footer-nav {
   margin-right: 25px;
   list-style: none;
 }
+
+.icon-container {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border: none;
+}
+
+.icon-container > a > img {
+    max-height: 100%;
+    max-width: 100%;
+}
