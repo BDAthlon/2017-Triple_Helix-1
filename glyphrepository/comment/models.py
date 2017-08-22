@@ -26,5 +26,6 @@ class Comment(SurrogatePK, Model):
         return '<Role({name})>'.format(name=self.name)
 
     def get_display_rating(self):
-        ratings = {"-1": "not rated", "1": "1", "2": "2", "3": "3", "4": "4", "5": "5"}
+        ratings = {"-1": "not rated", "1": "rated 1/5", "2": "rated 2/5", "3": "rated 3/5", "4": "rated 4/5",
+                   "5": "rated 5/5"}
         return ratings[str(self.rating)]
