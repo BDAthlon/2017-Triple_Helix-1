@@ -16,6 +16,8 @@ class Config(object):
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    GITHUB_CLIENT_ID = os.environ.get('glyphrepository_GITHUB_CLIENT_ID', 'secret-key')
+    GITHUB_CLIENT_SECRET = os.environ.get('glyphrepository_GITHUB_CLIENT_SECRET', 'secret-key')
 
 class ProdConfig(Config):
     """Production configuration."""

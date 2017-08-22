@@ -3,6 +3,9 @@
 {% block content %}
 <div class="container-narrow">
   <h1>Register</h1>
+
+    <p>You can either create an account using this form, or <a href="/github-login">login using your GitHub account</a> via OAuth, if you have one.</p>
+
     <br/>
     <form id="registerForm" class="form form-register" method="POST" action="" role="form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
@@ -24,7 +27,7 @@
             </div>
             <p><input class="btn btn-default btn-submit" type="submit" value="Register"></p>
     </form>
-    <p><em>Already registered?</em> Click <a href="/">here</a> to login.</p>
+    <p><em>Already registered?</em> Click <a href="/login">here</a> to login.</p>
 </div>
 {% endblock %}
 

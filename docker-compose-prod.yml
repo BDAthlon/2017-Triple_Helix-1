@@ -7,6 +7,9 @@ glyphs:
   environment:
     FLASK_DEBUG: 0
     glyphrepository_SECRET: 'THE_SUPER_SECRET_PASSWORD'
+    glyphrepository_GITHUB_CLIENT_ID: "A SECRET"
+    glyphrepository_GITHUB_CLIENT_SECRET: "ALSO SECRET"
+
   working_dir: /code/glyphrepository
   command: gunicorn -w 4 -b 0.0.0.0:5000 --pythonpath '/code,/code/glyphrepository' 'app:create_app()'
 
