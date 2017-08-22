@@ -16,6 +16,11 @@ class Glyph(SurrogatePK, Model):
     has_svg = Column(db.Boolean)
     has_jpg = Column(db.Boolean)
 
+    has_specification_pdf = Column(db.Boolean)
+    has_specification_png = Column(db.Boolean)
+    has_specification_svg = Column(db.Boolean)
+    has_specification_jpg = Column(db.Boolean)
+
     sbol_status = Column(db.String(80), unique=False, nullable=True)
     proposal_url = Column(db.String(80), unique=False, nullable=True)
 
@@ -69,6 +74,22 @@ class Glyph(SurrogatePK, Model):
 
         self.save()
 
+    def record_spec_file(self, file_extension):
+        if file_extension[0] == ".":
+            file_extension = file_extension[1:]
+
+        if file_extension == "pdf":
+            self.has_specification_pdf = True
+        elif file_extension == "png":
+            self.has_specification_png = True
+        elif file_extension == "svg":
+            self.has_specification_svg = True
+        elif file_extension == "jpg":
+            self.has_specification_jpg = True
+
+        self.save()
+
+
     def get_preferred_filename(self):
         if self.has_png:
             return str(self.id) + ".png"
@@ -78,5 +99,17 @@ class Glyph(SurrogatePK, Model):
             return str(self.id) + ".jpg"
         elif self.has_pdf:
             return str(self.id) + ".pdf"
+        else:
+            return ""
+
+    def get_preferred_specification_filename(self):
+        if self.has_specification_png:
+            return str(self.id) + "_specification.png"
+        elif self.has_specification_svg:
+            return str(self.id) + "_specification.svg"
+        elif self.has_specification_jpg:
+            return str(self.id) + "_specification.jpg"
+        elif self.has_specification_pdf:
+            return str(self.id) + "_specification.pdf"
         else:
             return ""

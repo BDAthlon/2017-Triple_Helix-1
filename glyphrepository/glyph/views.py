@@ -122,9 +122,21 @@ def add_glyph():
             new_glyph.delete()
             flash('No file found.', 'warning')
             return redirect(url_for('glyph.home'))
-        else:
-            flash('Glyph successfully added.', 'success')
-            return redirect(url_for('glyph.show_glyph', glyph_id=new_glyph.id))
+
+        for i in range(1, 5):
+            f = request.files["file_spec_path" + str(i)]
+            file_name = f.filename
+
+            if allowed_file(file_name):
+                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
+                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
+                filename = str(new_glyph.id) + "_specification" + file_extension
+
+                f.save(os.path.join(UPLOAD_FOLDER, filename))
+                new_glyph.record_spec_file(file_extension)
+
+        flash('Glyph successfully added.', 'success')
+        return redirect(url_for('glyph.show_glyph', glyph_id=new_glyph.id))
 
     else:
         flash_errors(form)
@@ -167,6 +179,19 @@ def edit_glyph(glyph_id):
 
                 f.save(os.path.join(UPLOAD_FOLDER, filename))
                 glyph.record_file(file_extension)
+
+        for i in range(1, 5):
+            f = request.files["file_spec_path" + str(i)]
+            file_name = f.filename
+
+            if allowed_file(file_name):
+                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
+                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
+                filename = str(glyph.id) + "_specification" + file_extension
+
+                f.save(os.path.join(UPLOAD_FOLDER, filename))
+                glyph.record_spec_file(file_extension)
+
 
         glyph.save()
 

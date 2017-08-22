@@ -19,6 +19,11 @@ class AddGlyphForm(Form):
     file_path3 = FileField(label="Image")
     file_path4 = FileField(label="Image")
 
+    file_spec_path1 = FileField(label="Image")
+    file_spec_path2 = FileField(label="Image")
+    file_spec_path3 = FileField(label="Image")
+    file_spec_path4 = FileField(label="Image")
+
     def __init__(self, *args, **kwargs):
         """Create instance."""
         super(AddGlyphForm, self).__init__(*args, **kwargs)

@@ -9,7 +9,28 @@
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src= "static/glyphs/{{ glyph.get_preferred_filename() }}" alt="{{ glyph.name }}">
+
+      <img src= "static/glyphs/{{ glyph.get_preferred_filename() }}" alt="Glyph image for {{ glyph.name }}">
+
+      <p>
+          {% if glyph.has_png %} <a href="static/glyphs/{{glyph.id}}.png" role="button" download="{{ glyph.name | replace(" ", "-") }}.png" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PNG</a>  {% endif %}
+          {% if glyph.has_pdf %} <a href="static/glyphs/{{glyph.id}}.pdf" role="button" download="{{ glyph.name | replace(" ", "-") }}.pdf" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PDF</a>  {% endif %}
+          {% if glyph.has_svg %} <a href="static/glyphs/{{glyph.id}}.svg" role="button" download="{{ glyph.name | replace(" ", "-") }}.svg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> SVG</a>  {% endif %}
+          {% if glyph.has_jpg %} <a href="static/glyphs/{{glyph.id}}.jpg" role="button" download="{{ glyph.name | replace(" ", "-") }}.jpg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> JPG</a>  {% endif %}
+      </p>
+
+
+    {% if glyph.get_preferred_specification_filename() %}
+      <img src= "static/glyphs/{{ glyph.get_preferred_specification_filename() }}" alt="Specification image for {{ glyph.name }}">
+
+      <p>
+          {% if glyph.has_specification_png %} <a href="static/glyphs/{{glyph.id}}_specification.png" role="button" download="{{ glyph.name | replace(" ", "-") }}_specification.png" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PNG</a>  {% endif %}
+          {% if glyph.has_specification_pdf %} <a href="static/glyphs/{{glyph.id}}_specification.pdf" role="button" download="{{ glyph.name | replace(" ", "-") }}_specification.pdf" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PDF</a>  {% endif %}
+          {% if glyph.has_specification_svg %} <a href="static/glyphs/{{glyph.id}}_specification.svg" role="button" download="{{ glyph.name | replace(" ", "-") }}_specification.svg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> SVG</a>  {% endif %}
+          {% if glyph.has_specification_jpg %} <a href="static/glyphs/{{glyph.id}}_specification.jpg" role="button" download="{{ glyph.name | replace(" ", "-") }}_specification.jpg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> JPG</a>  {% endif %}
+      </p>
+    {% endif %}
+
       <div class="caption">
 	  <p>Associated SO terms: {{ glyph.get_soterm_link() | safe }}</p>
       <p><abbr title="Glyphs begin as 'Proposed', are 'Endorsed' once they are recommended for use, and are 'Adopted' when they become part of the official standard">SBOL standard status</abbr>: {{ glyph.sbol_status }}</p>
@@ -28,12 +49,6 @@
             <a href="./{{ glyph.id}}/comment" class="btn btn-default" role="button">Rate/Comment</a>
         </p>
 
-      <p>
-          {% if glyph.has_png %} <a href="static/glyphs/{{glyph.id}}.png" role="button" download="{{ glyph.name | replace(" ", "-") }}.png" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PNG</a>  {% endif %}
-          {% if glyph.has_pdf %} <a href="static/glyphs/{{glyph.id}}.pdf" role="button" download="{{ glyph.name | replace(" ", "-") }}.pdf" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> PDF</a>  {% endif %}
-          {% if glyph.has_svg %} <a href="static/glyphs/{{glyph.id}}.svg" role="button" download="{{ glyph.name | replace(" ", "-") }}.svg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> SVG</a>  {% endif %}
-          {% if glyph.has_jpg %} <a href="static/glyphs/{{glyph.id}}.jpg" role="button" download="{{ glyph.name | replace(" ", "-") }}.jpg" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> JPG</a>  {% endif %}
-      </p>
 
       </div>
     </div>
