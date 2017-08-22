@@ -21,6 +21,6 @@ def user(user_id):
     """Show all Glyphs by a single user."""
 
     user = User.query.filter(User.id == user_id).all()[0]
-    glyphs = Glyph.query.filter(Glyph.user_id == user_id).all()
+    glyphs = Glyph.query.filter(Glyph.user_id == user_id).order_by(Glyph.soterm_id.asc()).all()
 
     return render_template('user/user.html', user=user, glyphs=glyphs)
