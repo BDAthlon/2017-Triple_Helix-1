@@ -46,6 +46,7 @@ def register_blueprints(app):
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(glyph.views.blueprint)
     app.register_blueprint(soterm.views.blueprint)
+    app.register_blueprint(comment.views.blueprint)
 
     return None
 

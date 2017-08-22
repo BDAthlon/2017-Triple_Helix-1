@@ -45,10 +45,13 @@ class Glyph(SurrogatePK, Model):
         """Return the average rating for a glyph, rounded to one decimal place"""
 
         # Make a list of all ratings >= 0 (-1 is a sentinel value for unrated)
+        # avoid multiply counting ratings from the same user
+        users = []
         ratings = []
         for comment in self.comments:
-            if comment.rating >= 0: 
+            if comment.rating >= 0 and comment.user_id not in users:
                 ratings.append(comment.rating)
+                users.append(comment.user_id)
 
         if len(ratings) == 0:
             return ""

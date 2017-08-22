@@ -36,15 +36,15 @@ def show_glyph(glyph_id):
 def glyph_comment(glyph_id):
     """Comment on a glyph."""
 
-    # User can make only one comment per glyph: if they've already made one then redirect to edit page
-    comment_list = Comment.query.filter(Comment.glyph_id == glyph_id, Comment.user_id == current_user.id).all()
-    if len(comment_list) > 0:
-        return redirect(url_for('glyph.edit_glyph_comment', glyph_id=glyph_id))
-
     form = CommentForm(request.form)
     if form.validate_on_submit() and request.method == 'POST':
-        Comment.create(name=form.name.data, rating=form.rating.data, comment=form.comment.data, user_id=current_user.id,
-                       glyph_id=glyph_id)
+        comment = Comment.create(name=form.name.data, rating=form.rating.data, comment=form.comment.data,
+                                 user_id=current_user.id, glyph_id=glyph_id)
+
+        # ensure all comments from same user give same rating
+        for c in Comment.query.filter(Comment.user_id==current_user.id, Comment.glyph_id==comment.glyph_id).all():
+            c.rating = form.rating.data
+            c.save()
 
         flash('Comment successfully updated.', 'success')
         return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
@@ -52,34 +52,6 @@ def glyph_comment(glyph_id):
         flash_errors(form)
 
     return render_template('comment/add-comment.html', form=form)
-
-
-@blueprint.route('/<glyph_id>/comment/edit', methods=['GET', 'POST'])
-@login_required
-def edit_glyph_comment(glyph_id):
-    """Comment on a glyph."""
-
-    # User can make edit their comment if they have already made one; if not, redirect back to glyph page
-    comment_list = Comment.query.filter(Comment.glyph_id == glyph_id and Glyph.user_id == current_user.id).all()
-    if len(comment_list) == 0:
-        flash('You have not yet made a comment on this glyph.', 'error')
-        return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
-
-    comment = comment_list[0]
-    form = CommentForm(request.form, name=comment.name, rating=comment.rating, comment=comment.comment)
-
-    if form.validate_on_submit() and request.method == 'POST':
-        comment.update(name=form.name.data, rating=form.rating.data, comment=form.comment.data, user_id=current_user.id,
-                       glyph_id=glyph_id)
-        comment.save()
-
-        flash('Comment successfully added.', 'success')
-        return redirect(url_for('glyph.show_glyph', glyph_id=glyph_id))
-    else:
-        flash_errors(form)
-
-    return render_template('comment/add-comment.html', form=form)
-
 
 
 @blueprint.route('/add', methods=['GET', 'POST'])
