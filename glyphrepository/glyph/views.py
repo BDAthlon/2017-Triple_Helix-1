@@ -11,10 +11,6 @@ from glyphrepository.comment.forms import CommentForm
 from glyphrepository.soterm.models import SOterm
 from flask_login import login_required, current_user
 
-from flask import current_app as app
-
-import os
-
 blueprint = Blueprint('glyph', __name__, static_folder='../static', url_prefix='/glyph',)
 
 
@@ -105,18 +101,8 @@ def add_glyph():
 
         valid_file = False
         for i in range(1, 5):
-
-            f = request.files["file_path" + str(i)]
-            file_name = f.filename
-
-            if allowed_file(file_name):
-                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
-                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
-                filename = str(new_glyph.id) + file_extension
-
-                f.save(os.path.join(UPLOAD_FOLDER, filename))
-                new_glyph.record_file(file_extension)
-                valid_file = True
+            file_added = new_glyph.save_glyph_file(request.files["file_path" + str(i)])
+            valid_file = (valid_file or file_added)
 
         if not valid_file:
             new_glyph.delete()
@@ -124,16 +110,7 @@ def add_glyph():
             return redirect(url_for('glyph.home'))
 
         for i in range(1, 5):
-            f = request.files["file_spec_path" + str(i)]
-            file_name = f.filename
-
-            if allowed_file(file_name):
-                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
-                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
-                filename = str(new_glyph.id) + "_specification" + file_extension
-
-                f.save(os.path.join(UPLOAD_FOLDER, filename))
-                new_glyph.record_spec_file(file_extension)
+            new_glyph.save_specification_file(request.files["file_spec_path" + str(i)])
 
         flash('Glyph successfully added.', 'success')
         return redirect(url_for('glyph.show_glyph', glyph_id=new_glyph.id))
@@ -142,7 +119,6 @@ def add_glyph():
         flash_errors(form)
 
     return render_template('glyph/add-glyph.html', form=form)
-
 
 
 @blueprint.route('/<glyph_id>/edit', methods=['GET', 'POST'])
@@ -167,31 +143,11 @@ def edit_glyph(glyph_id):
         glyph.update(name=form.name.data, soterm_id=form.soTerm.data, proposal_url=form.proposal_url.data,
                      sbol_status=form.sbol_status.data)
 
+        for i in range(1, 5):
+            glyph.save_glyph_file(request.files["file_path" + str(i)])
 
         for i in range(1, 5):
-            f = request.files["file_path" + str(i)]
-            file_name = f.filename
-
-            if allowed_file(file_name):
-                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
-                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
-                filename = str(glyph_id) + file_extension
-
-                f.save(os.path.join(UPLOAD_FOLDER, filename))
-                glyph.record_file(file_extension)
-
-        for i in range(1, 5):
-            f = request.files["file_spec_path" + str(i)]
-            file_name = f.filename
-
-            if allowed_file(file_name):
-                UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
-                file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
-                filename = str(glyph.id) + "_specification" + file_extension
-
-                f.save(os.path.join(UPLOAD_FOLDER, filename))
-                glyph.record_spec_file(file_extension)
-
+            glyph.save_specification_file(request.files["file_spec_path" + str(i)])
 
         glyph.save()
 
@@ -203,7 +159,3 @@ def edit_glyph(glyph_id):
 
     return render_template('glyph/edit-glyph.html', form=form, glyph=glyph)
 
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in set(['pdf', 'png', 'jpg', 'jpeg', 'svg'])

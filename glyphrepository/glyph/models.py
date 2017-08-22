@@ -4,6 +4,9 @@ from __future__ import division
 
 from glyphrepository.database import Column, Model, SurrogatePK, db, reference_col, relationship
 
+from flask import current_app as app
+import os
+
 class Glyph(SurrogatePK, Model):
     """A glyph."""
 
@@ -59,6 +62,34 @@ class Glyph(SurrogatePK, Model):
         else:
             return ""
 
+    @staticmethod
+    def allowed_file(filename):
+        return '.' in filename and \
+               filename.rsplit('.', 1)[1].lower() in set(['pdf', 'png', 'jpg', 'jpeg', 'svg'])
+
+    def save_glyph_file(self, f):
+        file_name = f.filename
+
+        if Glyph.allowed_file(file_name):
+            UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
+            file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
+            filename = str(self.id) + file_extension
+
+            f.save(os.path.join(UPLOAD_FOLDER, filename))
+            self.record_file(file_extension)
+            return True
+
+    def save_specification_file(self, f):
+        file_name = f.filename
+
+        if Glyph.allowed_file(file_name):
+            UPLOAD_FOLDER = os.path.join(app.root_path, 'static/glyphs')
+            file_extension = os.path.splitext(file_name)[-1].lower().replace('jpeg', 'jpg')
+            filename = str(self.id) + "_specification" + file_extension
+
+            f.save(os.path.join(UPLOAD_FOLDER, filename))
+            self.record_spec_file(file_extension)
+
     def record_file(self, file_extension):
         if file_extension[0] == ".":
             file_extension = file_extension[1:]
@@ -88,7 +119,6 @@ class Glyph(SurrogatePK, Model):
             self.has_specification_jpg = True
 
         self.save()
-
 
     def get_preferred_filename(self):
         if self.has_png:
